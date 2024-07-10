@@ -1,0 +1,33 @@
+<app-default-login-layout 
+    title="Bem-vindo! Faça login para continuar."
+    primaryBtnText="Login"
+    secondaryBtnText="Cadastrar"
+    (submit)="submit()"
+    (navigate)="navigate()"
+    [disablePrimaryBtn] = "!loginForm.valid"
+>
+
+    <form [formGroup]="loginForm">
+        
+        <app-primary-input
+            formControlName="email"
+            inputName="email"
+            type="email"
+            label="Email"
+            placeholder="joao@gmail.com"
+        >
+            <img src="assets/img/email-icon.png"/>
+        </app-primary-input>
+
+        <app-primary-input
+            formControlName="password" 
+            inputName="password"
+            type="password"
+            label="Senha"
+        >
+            <img src="assets/img/senha-icon.png"/>
+        </app-primary-input>
+        
+        <span>Esqueceu a Senha?</span>
+    </form>
+</app-default-login-layout>

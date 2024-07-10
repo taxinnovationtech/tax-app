@@ -1,0 +1,93 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+<app-cabecalho></app-cabecalho>
+
+<main class="conteudo_principal">
+
+    <table class="table_principal" *ngIf="listaTeses.length > 0, else semTeses">
+        <caption>
+            BASE DE TESES 
+            <img src="assets/img/add_tese.png" id="img_adiciona_tese" alt="Botão de adicionar tese" routerLink="/baseteses/cadastrar">
+        </caption>
+        
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>DESCRIÇÃO TESE</th>
+                <th>TRIBUTO</th>
+                <th>ESFERA</th>
+                <th>MODALIDADE</th>
+                <th>AP_FINANCEIRO</th>
+                <th>AP_INDUSTRIA</th>
+                <th>AP_COMERCIO
+                <th>AP_SERVICO</th>
+                <th>RESENHA</th>
+                <th>MEMORIA CALCULO</th>
+                <th>PERCENTUAL</th>
+                <th>STJ</th>
+                <th>STF</th>
+                <th>TJ</th>
+                <th>TRF</th>
+                <th>CARF</th>
+                <th>MODELO AR</th>
+                <th>REGIME TRIBUTAÇÃO</th>
+                <th>IMPORTANTE</th>
+                <th>CONSOLIDAÇÃO</th>
+                <th>NOVA PERGUNTA</th>
+                <th>VALIDAÇÃO</th>
+                <th>SUGESTAO DE FILTRO</th>
+                <th>COMO FICA</th>
+            </tr>
+        </thead>
+
+        <tbody >
+            
+                <tr *ngFor="let tese of listaTeses" class="rows_table-baseteses">
+                    <td >
+                        <div class="selecionador">
+                            
+                            <!--<input type="checkbox" id= "{{ tese.id }}">-->
+                            <img src="assets/img/editar.png" id="{{ tese.id }}" routerLink="/baseteses/editar/{{ tese.id }}" width="10px" height="10px">
+                            <img src="assets/img/olho.png" routerLink="/baseteses/visualizar/{{ tese.id }}" width="10px" height="10px">
+                            <p>{{ tese.id }}</p>
+                        </div>
+                    </td>
+                    <td >{{ tese.descricaoTese }}</td>
+                    <td >{{ tese.tributo }}</td>
+                    <td >{{ tese.modalidade }}</td>
+                    <td >{{ tese.esfera }}</td>
+                    <td >{{ tese.ap_financeiro }}</td>
+                    <td >{{ tese.ap_industria }}</td>
+                    <td >{{ tese.ap_comercio }}</td>
+                    <td >{{ tese.ap_servico }}</td>
+                    <td >{{ tese.resenha_sobre_acao }}</td>
+                    <td >{{ tese.memoria_calculo }}</td>
+                    <td >{{ tese.percentual }}</td>
+                    <td >{{ tese.stj }}</td>
+                    <td >{{ tese.stf }}</td>
+                    <td >{{ tese.tj }}</td>
+                    <td >{{ tese.trf }}</td>
+                    <td >{{ tese.carf_tit }}</td>
+                    <td >{{ tese.modelo_ara }}</td>
+                    <td >{{ tese.regimeTributacaoAplicavel }}</td>
+                    <td >{{ tese.consolidacao }}</td>
+                    <td >{{ tese.importante }}</td>
+                    <td >{{ tese.nova_pergunta }}</td>
+                    <td >{{ tese.validacao }}</td>
+                    <td >{{ tese.sugestao_de_filtro }}</td>
+                    <td >{{ tese.como_fica }}</td>
+
+                </tr>
+        </tbody>
+        <ngx-skeleton-loader count="100" appearance="line"></ngx-skeleton-loader>
+    </table>
+
+    <ng-template #semTeses>
+        <p class="not_found">Não foi possível consultar a base de teses.</p>
+    </ng-template>
+
+</main>

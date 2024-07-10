@@ -1,0 +1,58 @@
+@import "../../../styles/variables.scss";
+
+.cabecalho {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    border-bottom: 10px solid $color-font;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-wrap: initial;
+    justify-content: space-between;
+    align-items: center;
+    flex-basis: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+    align-self: auto;
+    width: 100%;
+
+    .container__imagem {
+        padding: 0px;
+    }
+
+    .lista-menu {
+        display: flex;
+        justify-content: flex-end;
+        text-align: center;
+        gap: 0 30px;
+        width: 100%;
+        list-style-type: none;
+        
+
+        .lista-menu__item {
+            padding: 20px;
+
+            .lista-menu__link {
+                text-decoration: none;
+                font-family: "Poppins", sans-serif;
+                font-weight: 800;
+                font-style: normal;
+                color: $color-font;
+                font-size: 0.9em;
+            }
+
+            .lista-menu__link:hover {
+                color: #426FA7;
+                transform: scale(1.1);
+            }
+
+            
+        }
+
+    }
+}

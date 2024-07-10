@@ -1,0 +1,88 @@
+<app-cabecalho></app-cabecalho>
+
+<section class="section-formulario">
+
+    <header class="header-formulario">
+        <h2>Preencha as informações abaixo:</h2>
+    </header>
+
+    <form class="formulario-teses">
+
+        <label for="descricaoTese"><b>DESCRIÇÃO TESE</b></label>
+        <textarea type="text" class="input-formulario" id="descricaoTese" name="descricaoTese" [(ngModel)]="tese.descricaoTese"></textarea>
+
+        <label for="tributo"><b>TRIBUTO</b></label>
+        <input type="text" class="input-formulario" id="tributo" name="tributo" [(ngModel)]="tese.tributo">
+
+        <label for="modalidade"><b>MODALIDADE</b></label>
+        <input type="text" class="input-formulario" id="modalidade" name="modalidade" [(ngModel)]="tese.modalidade">
+
+        <label for="esfera"><b>ESFERA</b></label>
+        <input type="text" class="input-formulario" id="esfera" name="esfera" [(ngModel)]="tese.esfera">
+
+        <label for="ap_financeiro"><b>AP FINANCEIRO</b></label>
+        <input type="text" class="input-formulario" id="ap_financeiro" name="ap_financeiro" [(ngModel)]="tese.ap_financeiro">
+
+        <label for="ap_industria"><b>AP INDUSTRIA</b></label>
+        <input type="text" class="input-formulario" id="ap_industria" name="ap_industria" [(ngModel)]="tese.ap_industria">
+
+        <label for="ap_comercio"><b>AP COMÉRCIO</b></label>
+        <input type="text" class="input-formulario" id="ap_comercio" name="ap_comercio" [(ngModel)]="tese.ap_comercio">
+
+        <label for="ap_servico"><b>AP SERVIÇOS</b></label>
+        <input type="text" class="input-formulario" id="ap_servico" name="ap_servico" [(ngModel)]="tese.ap_servico">
+
+        <label for="resenha"><b>RESENHA</b></label>
+        <textarea type="text" class="input-formulario" id="resenha" name="resenha" [(ngModel)]="tese.resenha_sobre_acao"></textarea>
+
+        <label for="memoria_calculo"><b>MEMÓRIA DE CÁLCULO</b></label>
+        <input type="text" class="input-formulario" id="memoria_calculo" name="memoria_calculo" [(ngModel)]="tese.memoria_calculo">
+
+        <label for="percentual"><b>PERCENTUAL</b></label>
+        <input type="number" class="input-formulario" id="percentual" name="percentual" [(ngModel)]="tese.percentual">
+
+        <label for="stj"><b>STJ</b></label>
+        <input type="text" class="input-formulario" id="stj" name="stj" [(ngModel)]="tese.stj">
+
+        <label for="stf"><b>STF</b></label>
+        <input type="text" class="input-formulario" id="stf" name="stf" [(ngModel)]="tese.stf">
+
+        <label for="tj"><b>TJ</b></label>
+        <input type="text" class="input-formulario" id="tj" name="tj" [(ngModel)]="tese.tj">
+
+        <label for="trf"><b>TRF</b></label>
+        <input type="text" class="input-formulario" id="trf" name="trf" [(ngModel)]="tese.trf">
+
+        <label for="carf"><b>CARF</b></label>
+        <input type="text" class="input-formulario" id="carf" name="carf" [(ngModel)]="tese.carf_tit">
+
+        <label for="modelo_ar"><b>MODELO AR</b></label>
+        <input type="text" class="input-formulario" id="modelo_ar" name="modelo_ar" [(ngModel)]="tese.modelo_ara">
+
+        <label for="regime_tributacao"><b>REGIME TRIBUTAÇÃO</b></label>
+        <input type="text" class="input-formulario" id="regime_tributacao" name="regime_tributacao" [(ngModel)]="tese.regimeTributacaoAplicavel">
+
+        <label for="importante"><b>IMPORTANTE</b></label>
+        <input type="text" class="input-formulario" id="importante" name="importante" [(ngModel)]="tese.importante">
+
+        <label for="consolidacao"><b>CONSOLIDAÇÃO</b></label>
+        <input type="text" class="input-formulario" id="consolidacao" name="consolidacao" [(ngModel)]="tese.consolidacao">
+
+        <label for="nova_pergunta"><b>NOVA PERGUNTA</b></label>
+        <input type="text" class="input-formulario" id="nova_pergunta" name="nova_pergunta" [(ngModel)]="tese.nova_pergunta">
+
+        <label for="validacao"><b>VALIDAÇÃO</b></label>
+        <input type="text" class="input-formulario" id="validacao" name="validacao" [(ngModel)]="tese.validacao">
+
+        <label for="sugestao"><b>SUGESTÃO</b></label>
+        <input type="text" class="input-formulario" id="sugestao" name="sugestao" [(ngModel)]="tese.sugestao_de_filtro">
+
+        <label for="como_fica"><b>COMO FICA</b></label>
+        <input type="text" class="input-formulario" id="como_fica" name="como_fica" [(ngModel)]="tese.como_fica">
+
+        <div class="container-botoes">
+            <button (click) = "criar()"><b>SALVAR</b></button>
+            <button (click) = "cancelar()"><b>CANCELAR</b></button>
+        </div>
+    </form>
+</section>
