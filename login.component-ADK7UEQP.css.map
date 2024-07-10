@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/pages/login/login.component.scss", "src/styles/variables.scss"],
+  "sourcesContent": ["@import \"../../../styles/variables.scss\";\r\n\r\nform {\r\n    width: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 24px;\r\n    margin-bottom: 34px;\r\n\r\n    span {\r\n        font-size: 14px;\r\n        text-decoration: underline;\r\n        color: $primary-color;\r\n        text-align: end;\r\n    }\r\n}", "$primary-color:#42466D;\r\n$gray-bg: #EEEEEE;\r\n$color-font: #1D2246;\r\n$color-secundary-font: #6EC1E4;"],
+  "mappings": "AAEA,KACI,MAAA,KACA,QAAA,KACA,eAAA,OACA,IAAA,KACA,cAAA,KAEA,KAAA,KACI,UAAA,KACA,gBAAA,UACA,MCZO,QDaP,WAAA",
+  "names": []
+}
