@@ -1,16 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { CabecalhoComponent } from '../../components/cabecalho/cabecalho.component';
 import { FormsModule } from '@angular/forms';
-import { Tese } from '../baseteses/tese';
+
 import { TeseService } from '../../services/tese.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { NgIf } from '@angular/common';
+import { Tese } from '../../types/tese.type';
+
 
 @Component({
   selector: 'app-visualizar-tese',
   standalone: true,
   imports: [
     CabecalhoComponent,
-    FormsModule
+    FormsModule,
+    NgxSkeletonLoaderModule,
+    NgIf
   ],
   templateUrl: './visualizar-tese.component.html',
   styleUrl: './visualizar-tese.component.scss'

@@ -1,0 +1,74 @@
+@import "../../../styles/variables.scss";
+
+.header-formulario {
+    border-bottom: 10px solid $color-font;
+}
+
+.section-formulario {
+    width: 100%;
+    text-align: center;
+}
+
+.formulario-processos{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+
+    .formulario-processos > label {
+        font-weight: 800;
+        color: $color-font;
+    }
+    .input-formulario {
+        width: 20%;
+        border-radius: 5px;
+        padding: 7px;
+        text-align: center;
+    }
+
+    .btns-menu {
+        border: none;
+    }
+    
+    .btns-menu:hover {
+        transform: scale(1.05);
+    }
+
+    .container_busca {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 5px;
+        width: 20%;
+
+        #tese {
+            width: 100%;
+        }
+    }
+
+    .container-botoes {
+
+        margin: 10px 0 10px 0;
+        display: flex;
+        width: 100%;
+        position: relative;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+
+    }
+
+    .container-botoes > button {
+        padding: 10px;
+        margin: 10px 15px 10px 15px;
+        width: 9%;
+        border-radius: 5px;
+        font-size: 1em;
+        background-color: $color-font;
+        color: white;
+    }
+    
+}

@@ -1,0 +1,213 @@
+
+<app-cabecalho></app-cabecalho>
+
+<section class="info-empresas">
+    <div class="container-busca">
+        <h1 class="titulo_busca">INFORME O CNPJ:</h1>
+        <input type="text" class="input-busca" value="" placeholder="11.111.111/0001-01" mask="00.000.000/0000-00" #inputCnpj>
+        <button id="btn-pesquisar" class="btns-menu" (click)="buscarPorCnpj(inputCnpj.value)">
+            <img src="assets/img/procurar.png">
+        </button>
+        <button id="btn-limpar" class="btns-menu">
+            <img src="assets/img/eraser.png" (click)="limpar()">
+        </button>
+        <button id="btn-salvar" class="btns-menu">
+            <img src="assets/img/diskette.png" (click)="salvar()">
+        </button>
+    </div>
+
+    <div class="infos-empresa" *ngIf="empresa.id != -1, else semEmpresa">
+
+        <ul class="lista-infos-empresas">
+            <li class="item-lista-infos-empresas">
+                <h2 class="titulo_itens-empresa">NOME:</h2>
+                <p class="conteudo_gerais">{{ empresa.razaoSocial }}</p>
+            </li>
+            <li class="item-lista-infos-empresas">  
+                <h2 class="titulo_itens-empresa">CNPJ:</h2>
+                <p class="conteudo_gerais" >{{ empresa.cnpj | mask: "00.000.000/0000-00" }}</p>
+            </li>
+            <li class="item-lista-infos-empresas">  
+                <h2 class="titulo_itens-empresa">COMERCIAL:</h2>
+                <p class="conteudo_gerais">{{ empresa.comercial?.nomeComercial }}</p>
+            </li>
+            <li class="item-lista-infos-empresas">  
+                <h2 class="titulo_itens-empresa">CNAE PRINCIPAL:</h2>
+                <p class="conteudo_gerais">{{ empresa.cnaePrincipal }}</p>
+            </li>
+            <li class="item-lista-infos-empresas">  
+                <h2 class="titulo_itens-empresa">SEGMENTO:</h2>
+                <p class="conteudo_gerais">{{ empresa.segmento.descricaoSegmento }}</p>
+            </li>
+        </ul>
+
+        <ul class="lista-infos-empresas infos-financeiras">
+            <li class="item-lista-infos-empresas financeiro">
+                <h2 class="titulo_itens-empresa">FATURAMENTO ANUAL:</h2>
+                <input id="faturamento_anual" class="input-busca" type="number" [(ngModel)]="empresa.faturamentoAnual">
+            </li>
+            <li class="item-lista-infos-empresas financeiro">
+                <h2 class="titulo_itens-empresa">QTD DE FUNCIONÁRIOS:</h2>
+                <input id="qtd_funcionarios" class="input-busca" type="number" [(ngModel)]="empresa.quantidadeFuncionarios">
+            </li>
+            <li class="item-lista-infos-empresas financeiro">
+                <h2 class="titulo_itens-empresa">FOLHA SALARIAL:</h2>
+                <input id="folha_salarial" class="input-busca" type="number" [(ngModel)]="empresa.folhaDePagamento">
+            </li>
+        </ul>     
+    </div>
+    <ng-template #semEmpresa>
+        <p class="not_found">Carregando...</p>
+        <ngx-skeleton-loader count="30" appearance="line"></ngx-skeleton-loader>
+    </ng-template>
+    
+</section>
+
+<section class="container-teses">
+    
+    <!----------------------------------------------------------------------------------------------------------------->
+
+    <table class="tables-teses">
+         <caption class="caption-tables">
+            TESES AJUIZADAS 
+            <img src="assets/img/scales-of-justice.png" id="img_adiciona_tese" alt="Botão de adicionar tese" routerLink="/baseteses/cadastrar">
+        </caption>
+         <thead class="header-tables">
+            <tr>
+                <th>ID</th>
+                <th>DESC. TESE</th>
+                <th>PET. INICIAL</th>
+            </tr>
+        </thead>
+
+         <tbody class="body-tables">
+            
+            <tr *ngFor="let processo of empresa.processos" class="linha">             
+                <td>
+                    <div class="selecionador">
+                        <img src="assets/img/editar.png" width="12px" height="12px" routerLink="/processo/editar/{{ processo.id }}" [queryParams]="{cnpj:empresa.cnpj}"/>
+                        <p *ngIf="processo.tese != null, else TeseNula">{{ processo.tese.id }}</p>
+                        <ng-template #TeseNula>
+                            <p>null</p>
+                        </ng-template>
+                    </div>
+                </td>
+                <td>
+                    <p *ngIf="processo.tese != null, else TeseNula">{{ processo.tese.descricaoTese }}</p>
+                        <ng-template #TeseNula>
+                            <p>null</p>
+                        </ng-template>
+                </td>
+                <td>{{ processo.pedidoInicial }}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!----------------------------------------------------------------------------------------------------------------->
+
+    <table class="tables-teses" (dragover)="onDragOver($event)" (drop)="onDrop($event, 'Teses Aplicaveis')">
+         <caption class="caption-tables">
+            TESES APLICAVEIS 
+            <img src="assets/img/scales-of-justice.png" id="img_adiciona_tese" alt="Botão de adicionar tese" routerLink="/baseteses/cadastrar">
+        </caption>
+         <thead class="header-tables">
+            <tr>
+                <th>ID</th>
+                <th>DESC. TESE</th>
+                <th>PERC.</th>
+            </tr>
+        </thead>
+
+         <tbody class="body-tables">
+            
+            <tr class="linha" draggable="true" *ngFor="let tese_aplicavel of empresa.segmento.teses_aplicaveis" (dragstart)="onDragStart(tese_aplicavel)">          
+                <td>
+                    <div class="container-id">
+                        <p></p>
+                        <p>{{ tese_aplicavel.id }}</p>
+                        <img src="assets/img/flecha.png" (click)="aplicaveisParaSelecionaveis(tese_aplicavel)">
+                    </div>
+                </td>
+                <td>{{ tese_aplicavel.descricaoTese }}</td>
+                <td>{{ tese_aplicavel.percentual }}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!----------------------------------------------------------------------------------------------------------------->
+
+    <table class="tables-teses" (dragover)="onDragOver($event)" (drop)="onDrop($event, 'Teses Selecionadas')">
+         <caption class="caption-tables">
+            TESES SELECIONADAS 
+            <img src="assets/img/scales-of-justice.png" id="img_adiciona_tese" alt="Botão de adicionar tese" routerLink="/baseteses/cadastrar">
+        </caption>
+         <thead class="header-tables">
+            <tr>
+                <th>ID</th>
+                <th>DESC. TESE</th>
+                <th>PERC.</th>
+            </tr>
+        </thead>
+
+         <tbody class="body-tables">
+            
+            <tr class="linha" draggable="true" *ngFor="let tese_selecionada of this.listaTesesSelecionaveis" (dragstart)="onDragStart(tese_selecionada)">             
+                <td>
+                    <div class="container-id">
+                        <img src="assets/img/flecha-invertida.png" (click)="selecionaveisParaAplicaveis(tese_selecionada)">
+                        <p>{{ tese_selecionada.id }}</p>
+                        <img src="assets/img/flecha.png" (click)="selecionaveisParaFinais(tese_selecionada)">
+                    </div>
+                </td>
+                <td>{{ tese_selecionada.descricaoTese }}</td>
+                <td>{{ tese_selecionada.percentual }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!----------------------------------------------------------------------------------------------------------------->
+
+    <table class="tables-teses" (dragover)="onDragOver($event)" (drop)="onDrop($event, 'Teses Finais')">
+         <caption class="caption-tables">
+            TESES FINAIS 
+            <img src="assets/img/scales-of-justice.png" id="img_adiciona_tese" alt="Botão de adicionar tese" routerLink="/baseteses/cadastrar">
+        </caption>
+         <thead class="header-tables">
+            <tr>
+                <th>ID</th>
+                <th>DESC. TESE</th>
+                <th>PERC.</th>
+            </tr>
+        </thead>
+
+         <tbody class="body-tables" *ngIf="!flag_busca_proposta, else semTesesFinais" >
+            
+            <tr draggable="true" *ngFor="let tese_final of this.listaTesesFinais" (dragstart)="onDragStart(tese_final)">             
+                <td>
+                    <div class="container-id">
+                        <img src="assets/img/flecha-invertida.png" (click)="finaisParaSelecionaveis(tese_final)">
+                        <p>{{ tese_final.id }}</p>
+                        <p></p>
+                    </div>
+                </td>
+                <td>{{ tese_final.descricaoTese }}</td>
+                <td>{{ tese_final.percentual }}</td>
+                
+            </tr>
+
+        </tbody>
+
+        <ng-template #semTesesFinais>
+            <td></td>
+            <td>
+                <p class="not_found">Carregando...</p>
+                <ngx-skeleton-loader count="30" appearance="line"></ngx-skeleton-loader>
+            </td>
+            <td></td>
+        </ng-template>
+    </table>
+
+    <!----------------------------------------------------------------------------------------------------------------->
+
+
+</section>

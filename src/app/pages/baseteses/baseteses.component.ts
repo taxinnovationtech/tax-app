@@ -1,10 +1,12 @@
 import { TeseService } from './../../services/tese.service';
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Tese } from './tese';
+
 import { CabecalhoComponent } from '../../components/cabecalho/cabecalho.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { ToastrService } from 'ngx-toastr';
+import { Tese } from '../../types/tese.type';
 
 
 @Component({
@@ -26,7 +28,7 @@ export class BasetesesComponent implements OnInit{
      
   ];
 
-  constructor(private service:TeseService) {
+  constructor(private service:TeseService, private toastService: ToastrService, private router: Router) {
 
   }
 
@@ -34,6 +36,11 @@ export class BasetesesComponent implements OnInit{
   ngOnInit(): void {
     this.service.listar().subscribe((listaTeses) => {
       this.listaTeses = listaTeses;
+    }, erro => {
+      if (erro.status == 403) {
+        this.toastService.error("Você precisa estar logado para acessar essas informações!!!");
+      setTimeout( () => { this.router.navigate(['/login']); }, 1000);
+      }
     })
   }
 

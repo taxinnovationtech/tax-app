@@ -1,0 +1,66 @@
+
+<app-cabecalho></app-cabecalho>
+
+<section class="section-formulario">
+
+    <header class="header-formulario">
+        <h2>Altere o processo abaixo:</h2>
+    </header>
+
+    <form class="formulario-processos" *ngIf="processo.id != -1, else semTeses">
+
+        <label for="id_processo"><b>ID</b></label>
+        <input type="number" class="input-formulario" id="id_processo" name="id_processo" [(ngModel)]="processo.id" readonly>
+
+        <label for="numero_processo"><b>NUMERO DO PROCESSO</b></label>
+        <input type="text" class="input-formulario" id="numero_processo" name="numero_processo" [(ngModel)]="processo.numeroProcesso" readonly>
+
+        <label for="caracteristicas"><b>CARACTERÍSTICAS</b></label>
+        <input type="text" class="input-formulario" id="caracteristicas" name="caracteristicas" [(ngModel)]="processo.caracteristicas" readonly>
+
+        <label for="orgao_julgador"><b>ORGÃO JULGADOR</b></label>
+        <input type="text" class="input-formulario" id="orgao_julgador" name="orgao_julgador" [(ngModel)]="processo.orgaoJulgador" readonly>
+
+        <label for="autuado"><b>AUTUADO EM</b></label>
+        <input type="text" class="input-formulario" id="autuado" name="autuado" [(ngModel)]="processo.autuado" readonly>
+
+        <label for="classe_judicial"><b>CLASSE JUDICIAL</b></label>
+        <input type="text" class="input-formulario" id="classe_judicial" name="classe_judicial" [(ngModel)]="processo.classeJudicial" readonly>
+
+        <label for="polo_ativo"><b>POLO ATIVO</b></label>
+        <input type="text" class="input-formulario" id="polo_ativo" name="polo_ativo" [(ngModel)]="processo.poloAtivo" readonly>
+
+        <label for="polo_passivo"><b>POLO PASSIVO</b></label>
+        <input type="text" class="input-formulario" id="polo_passivo" name="polo_passivo" [(ngModel)]="processo.poloPassivo" readonly>
+
+        <label for="ultima_movimentacao"><b>ULTIMA MOVIMENTAÇÃO</b></label>
+        <input type="text" class="input-formulario" id="ultima_movimentacao" name="ultima_movimentacao" [(ngModel)]="processo.ultimaMovimentacao" readonly>
+
+        <label for="tribunal"><b>TRIBUNAL</b></label>
+        <input type="text" class="input-formulario" id="tribunal" name="tribunal" [(ngModel)]="processo.tribunal" readonly>
+
+        <label for="pedido_inicial"><b>PEDIDO INICIAL</b></label>
+        <textarea type="text" class="input-formulario" id="pedido_inicial" name="pedido_inicial" [(ngModel)]="processo.pedidoInicial" readonly></textarea>
+            
+        <label for="tese"><b>TESE</b></label>
+        <div class="container_busca" *ngIf="!flag_busca, else semTeses">
+        <input type="number" class="input-formulario" id="tese" name="tese" [(ngModel)]="processo.tese!.id" #idTeseBusca>
+            <button id="btn-pesquisar" class="btns-menu" (click)="buscarTese(idTeseBusca.value)">
+                <img src="assets/img/procurar.png">
+            </button>
+        </div>
+
+        <label for="descricao"><b>DESCRIÇÃO DA TESE</b></label>
+        <textarea type="text" class="input-formulario" id="descricao" name="descricao" [(ngModel)]="processo.tese!.descricaoTese" readonly></textarea>
+
+        <div class="container-botoes">
+            <button (click) = "editar()"><b>SALVAR</b></button>
+            <button (click) = "cancelar()"><b>CANCELAR</b></button>
+        </div> 
+    </form>
+
+    <ng-template #semTeses>
+        <p class="not_found">Carregando...</p>
+        <ngx-skeleton-loader count="5" appearance="line"></ngx-skeleton-loader>
+    </ng-template>
+</section>

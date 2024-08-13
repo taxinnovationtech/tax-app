@@ -23,7 +23,7 @@
                 <th>MODALIDADE</th>
                 <th>AP_FINANCEIRO</th>
                 <th>AP_INDUSTRIA</th>
-                <th>AP_COMERCIO
+                <th>AP_COMERCIO</th>
                 <th>AP_SERVICO</th>
                 <th>RESENHA</th>
                 <th>MEMORIA CALCULO</th>
@@ -74,8 +74,8 @@
                     <td >{{ tese.carf_tit }}</td>
                     <td >{{ tese.modelo_ara }}</td>
                     <td >{{ tese.regimeTributacaoAplicavel }}</td>
-                    <td >{{ tese.consolidacao }}</td>
                     <td >{{ tese.importante }}</td>
+                    <td >{{ tese.consolidacao }}</td>
                     <td >{{ tese.nova_pergunta }}</td>
                     <td >{{ tese.validacao }}</td>
                     <td >{{ tese.sugestao_de_filtro }}</td>
@@ -83,11 +83,11 @@
 
                 </tr>
         </tbody>
-        <ngx-skeleton-loader count="100" appearance="line"></ngx-skeleton-loader>
+        
     </table>
-
     <ng-template #semTeses>
-        <p class="not_found">Não foi possível consultar a base de teses.</p>
+        <p class="not_found">Carregando...</p>
+        <ngx-skeleton-loader count="30" appearance="line"></ngx-skeleton-loader>
     </ng-template>
 
 </main>

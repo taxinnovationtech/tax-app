@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Tese } from '../pages/baseteses/tese';
+
 import { Observable } from 'rxjs';
+import { Tese } from '../types/tese.type';
 
 @Injectable({
   providedIn: 'root'

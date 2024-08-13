@@ -6,6 +6,10 @@ import { BasetesesComponent } from './pages/baseteses/baseteses.component';
 import { EditarTeseComponent } from './pages/editar-tese/editar-tese.component';
 import { CriarTeseComponent } from './pages/criar-tese/criar-tese.component';
 import { VisualizarTeseComponent } from './pages/visualizar-tese/visualizar-tese.component';
+import { ClassificacaoComponent } from './pages/classificacao/classificacao.component';
+import { EditarProcessoComponent } from './pages/editar-processo/editar-processo.component';
+import { EmpresasComponent } from './pages/empresas/empresas.component';
+import { VisualizarEmpresaComponent } from './pages/visualizar-empresa/visualizar-empresa.component';
 
 export const routes: Routes = [
     {
@@ -40,6 +44,41 @@ export const routes: Routes = [
     {
         path: "baseteses/visualizar/:id",
         component: VisualizarTeseComponent
+    },
+
+    {
+        path: "classificacao",
+        component: ClassificacaoComponent
+    },
+
+    {
+        path: "classificacao/:cnpj",
+        component: ClassificacaoComponent
+    },
+
+    {
+        path: "processo/editar",
+        component: EditarProcessoComponent
+    },
+
+    {
+        path: "processo/editar/:id",
+        component: EditarProcessoComponent
+    },
+
+    {
+        path: "empresas",
+        component: EmpresasComponent
+    },
+
+    {
+        path: "empresas/visualizar/:id",
+        component: VisualizarEmpresaComponent
+    },
+    
+    {
+        path: "empresas/visualizar",
+        component: VisualizarEmpresaComponent
     },
     
     

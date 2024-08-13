@@ -1,5 +1,5 @@
 export interface Tese {
-    id?: number,
+    id: number,
     descricaoTese: string,
     tributo: string,
     modalidade: string,

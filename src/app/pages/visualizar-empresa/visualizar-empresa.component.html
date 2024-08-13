@@ -1,0 +1,195 @@
+<app-cabecalho></app-cabecalho>
+
+<section class="info-empresas">
+    <div class="infos-empresa" *ngIf="empresa.id != -1, else semEmpresa">
+        <ul class="lista-infos-empresas">
+            <li class="item-lista-infos-empresas">
+                <h2 class="titulo_itens-empresa">NOME:</h2>
+                <p class="conteudo_gerais">{{ empresa.razaoSocial }}</p>
+            </li>
+            <li class="item-lista-infos-empresas">  
+                <h2 class="titulo_itens-empresa">CNPJ:</h2>
+                <p class="conteudo_gerais" >{{ empresa.cnpj | mask: "00.000.000/0000-00" }}</p>
+            </li>
+            <li class="item-lista-infos-empresas">  
+                <h2 class="titulo_itens-empresa">COMERCIAL:</h2>
+                <p class="conteudo_gerais">{{ empresa.comercial?.nomeComercial }}</p>
+            </li>
+            <li class="item-lista-infos-empresas">  
+                <h2 class="titulo_itens-empresa">CNAE PRINCIPAL:</h2>
+                <p class="conteudo_gerais">{{ empresa.cnaePrincipal }}</p>
+            </li>
+            <li class="item-lista-infos-empresas">  
+                <h2 class="titulo_itens-empresa">SEGMENTO:</h2>
+                <p class="conteudo_gerais">{{ empresa.segmento.descricaoSegmento }}</p>
+            </li>
+        </ul>
+
+        <ul class="lista-infos-empresas infos-financeiras">
+            <li class="item-lista-infos-empresas financeiro">
+                <h2 class="titulo_itens-empresa">FATURAMENTO ANUAL:</h2>
+                <input id="faturamento_anual" class="input-busca" type="number" [(ngModel)]="empresa.faturamentoAnual">
+            </li>
+            <li class="item-lista-infos-empresas financeiro">
+                <h2 class="titulo_itens-empresa">QTD DE FUNCIONÁRIOS:</h2>
+                <input id="qtd_funcionarios" class="input-busca" type="number" [(ngModel)]="empresa.quantidadeFuncionarios">
+            </li>
+            <li class="item-lista-infos-empresas financeiro">
+                <h2 class="titulo_itens-empresa">FOLHA SALARIAL:</h2>
+                <input id="folha_salarial" class="input-busca" type="number" [(ngModel)]="empresa.folhaDePagamento">
+            </li>
+        </ul>
+    </div>
+    <ng-template #semEmpresa>
+        <p class="not_found">Carregando...</p>
+        <ngx-skeleton-loader count="30" appearance="line"></ngx-skeleton-loader>
+    </ng-template>
+</section>
+
+<section class="container-table">
+
+        <table class="tables-empresa" *ngIf="empresa.processos.length > 0, else semProcesso">
+            <caption>
+                PROCESSOS
+            </caption>
+            
+            <thead>
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>NUMERO DO PROCESSO</th>
+                    <th>AUTUADO EM</th>
+                    <th>CLASSE JUDICIAL</th>
+                    <th>POLO ATIVO</th>
+                    <th>POLO PASSIVO</th>
+                    <th>TRIBUNAL</th>
+                    <th>PEDIDO INICIAL</th>
+                    <th>TESE</th>
+                    <th>DESCRIÇÃO DA TESE</th>
+                </tr>
+            </thead>
+    
+            <tbody >
+                
+                    <tr class="rows_table" *ngFor="let processo of empresa.processos | paginate: {itemsPerPage: 7, currentPage: pProcesso, totalItems: empresa.processos.length, id: 'processos-pagination'}" >
+                        <td >
+                            <div class="selecionador">
+                                <p>{{ processo.id }}</p>
+                            </div>
+                        </td>
+                        <td >{{ processo.numeroProcesso }}</td>
+                        <td >{{ processo.autuado }}</td>
+                        <td >{{ processo.classeJudicial }}</td>
+                        <td >{{ processo.poloAtivo }}</td>
+                        <td >{{ processo.poloPassivo }}</td>
+                        <td >{{ processo.tribunal }}</td>
+                        <td >{{ processo.pedidoInicial }}</td>
+                        <td >{{ processo.tese?.id }}</td>
+                        <td >{{ processo.tese?.descricaoTese }}</td>
+                    </tr>
+            </tbody>
+            
+        </table>
+        <ng-template #semProcesso>
+            <p class="not_found">AINDA NÃO FORAM PROCESSOS CADASTRADOS PARA ESSA EMPRESA</p>
+        </ng-template>
+        <div class="container--paginator" *ngIf="empresa.processos.length > 0">
+            <pagination-controls (pageChange)="pProcesso = $event" id="processos-pagination"></pagination-controls>
+        </div>
+</section>
+
+<section class="container-table">
+
+    <table class="tables-empresa" *ngIf="empresa.segmento.teses_aplicaveis?.length! > 0">
+        <caption>
+            TESES APLICAVEIS
+        </caption>
+        
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>DESCRIÇÃO TESE</th>
+                <th>TRIBUTO</th>
+                <th>ESFERA</th>
+                <th>MODALIDADE</th>
+                <th>PERCENTUAL</th>
+            </tr>
+        </thead>
+
+        <tbody >
+            
+                <tr class="rows_table" *ngFor="let tese of empresa.segmento.teses_aplicaveis! | paginate: {itemsPerPage: 5, currentPage: p, totalItems: empresa.segmento.teses_aplicaveis!.length, id:'segmentos-pagination'}" >
+                    <td >
+                        <div class="selecionador">
+                            <p>{{ tese.id }}</p>
+                        </div>
+                    </td>
+                    <td >{{ tese.descricaoTese }}</td>
+                    <td >{{ tese.tributo }}</td>
+                    <td >{{ tese.esfera }}</td>
+                    <td >{{ tese.modalidade }}</td>
+                    <td >{{ tese.percentual }}</td>
+                </tr>
+        </tbody>
+    </table>
+
+    <div class="container--paginator" *ngIf="empresa.segmento.teses_aplicaveis?.length! > 0">
+        <pagination-controls (pageChange)="p = $event" id="segmentos-pagination"></pagination-controls>
+    </div>
+    
+</section>
+
+<section class="container-table">
+
+    <table class="tables-empresa" *ngIf="ultimaProposta.tesesOferecidas.length > 0, else semProposta">
+        <caption>
+            ÚLTIMA PROPOSTA
+        </caption>
+        
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>DESCRIÇÃO TESE</th>
+                <th>TRIBUTO</th>
+                <th>ESFERA</th>
+                <th>MODALIDADE</th>
+                <th>PERCENTUAL</th>
+            </tr>
+        </thead>
+
+        <tbody >
+            
+                <tr class="rows_table" *ngFor="let tese of ultimaProposta.tesesOferecidas" >
+                    <td >
+                        <div class="selecionador">
+                            <p>{{ tese.id }}</p>
+                        </div>
+                    </td>
+                    <td >{{ tese.descricaoTese }}</td>
+                    <td >{{ tese.tributo }}</td>
+                    <td >{{ tese.esfera }}</td>
+                    <td >{{ tese.modalidade }}</td>
+                    <td >{{ tese.percentual }}</td>
+                </tr>
+        </tbody>
+        
+        <tfoot class="tfoot-tables">
+            <tr class="rows_table">
+                <td>TOTAL</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ totalProposta | mask: "0.00000"}}</td>
+            </tr>
+        </tfoot>
+    </table>
+    <ng-template #semProposta>
+        <p class="not_found" id="p-semProposta">{{ statusProposta }}</p>
+    </ng-template>
+</section>

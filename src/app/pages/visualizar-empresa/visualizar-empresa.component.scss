@@ -1,14 +1,61 @@
 @import "../../../styles/variables.scss";
 
-.conteudo_principal {
-    width: 100%;
+.info-empresas {
+    border-bottom: 10px solid $color-font;
+    
+    .infos-empresa {
+        display: flex;
+        gap: 2em;
+        justify-content: space-between;
+        padding: 1em 8em;
+    
+        .lista-infos-empresas{
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            justify-items: f;
+            align-items:flex-start;
+    
+            .item-lista-infos-empresas {
+                display: flex;
+                gap: 0.5vw;
+                align-items: center;
+            }
+    
+            .financeiro {
+                gap: 1.5vw;
+            }
+    
+            .titulo_itens-empresa {
+                font-size: 1em;
+                color: $color-font;
+            }
 
-    .table_principal {
+            .conteudo_gerais {
+                font-size: 0.9em;
+                font-weight: 600;
+                color: $color-font;
+            }
+        }
+    
+        .infos-financeiras {
+            align-items: flex-end;
+        }
+        
+    }
+}
+
+.container-table{
+    width: 100%;
+    border-bottom: 10px solid $color-font;
+
+    .tables-empresa {
         width: 100%;
         border-collapse: collapse;
         border: 1px solid black;
         text-align: center;
-        table-layout: auto;
+        table-layout: fixed;
         position: initial;
 
         caption {
@@ -53,6 +100,7 @@
             padding: 3em 0 3em 0;
             margin: 2em;
             font-size: 0.6em;
+            min-width: 10px;
             .selecionador {
                 display: flex;
                 align-items: center;
@@ -74,23 +122,26 @@
             background:#bdbdbd;
             //color: white;
         }
-
-    }
-
-    .not_found {
-        width: 100%;
-        font-family: "Poppins", sans-serif;
-        font-weight: 800;
-        font-style: normal;
-        color: $color-font;
-        font-size: 2em;
-        text-align: center;
-    }
 }
 
+tfoot > tr > td {
+    background-color: #7a7a7a;
+    color: white;
+    font-size: 0.6em;
+}
 
+.container--paginator {
+    text-align: center;
+}
 
+}
 
-
-
-
+.not_found {
+    width: 100%;
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    color: $color-font;
+    font-size: 2em;
+    text-align: center;
+}

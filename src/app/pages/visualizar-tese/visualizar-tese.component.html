@@ -6,7 +6,7 @@
         <h2>VISUALIZAR</h2>
     </header>
 
-    <form class="formulario-teses">
+    <form class="formulario-teses" *ngIf="tese.id != 0, else semTeses">
 
         <label for="idTese"><b>ID</b></label>
         <input type="number" class="input-formulario" id="idTese" name="idTese" [(ngModel)]="tese.id" readonly>
@@ -87,5 +87,9 @@
             <button (click) = "voltar()"><b>VOLTAR</b></button>
         </div>
     </form>
+    <ng-template #semTeses>
+        <p class="not_found">Carregando...</p>
+        <ngx-skeleton-loader count="5" appearance="line"></ngx-skeleton-loader>
+    </ng-template>
 </section>
 

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CabecalhoComponent } from '../../components/cabecalho/cabecalho.component';
-import { Tese } from '../baseteses/tese';
+
 import { TeseService } from '../../services/tese.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Tese } from '../../types/tese.type';
 
 @Component({
   selector: 'app-criar-tese',
@@ -43,7 +45,7 @@ export class CriarTeseComponent implements OnInit{
     sugestao_de_filtro: '',
     como_fica: ''
 }
-  constructor(private service: TeseService, private router:Router, private route: ActivatedRoute) {}
+  constructor(private service: TeseService, private router:Router, private route: ActivatedRoute, private toastService: ToastrService) {}
 
   ngOnInit(): void {
     
@@ -52,6 +54,11 @@ export class CriarTeseComponent implements OnInit{
   criar() {
     this.service.cadastrar(this.tese).subscribe(() => {
       this.router.navigate(['/baseteses'])
+    }, erro => {
+      if (erro.status == 403) {
+        this.toastService.error("Você precisa estar logado para acessar essas informações!!!");
+      setTimeout( () => { this.router.navigate(['/login']); }, 1000);
+      }
     })
   }
 
